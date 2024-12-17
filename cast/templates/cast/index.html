@@ -1,0 +1,12 @@
+
+<h1>Cast</h1>
+<p>People involved in the film industry</p>
+{% if people %}
+    <ul>
+    {% for person in people %}
+        <li><a href="/cast/{{ person.id }}/">{{ person.first_name }} {{person.last_name}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No people are available.</p>
+{% endif %}
