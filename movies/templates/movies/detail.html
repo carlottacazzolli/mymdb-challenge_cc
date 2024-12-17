@@ -1,0 +1,24 @@
+<html>
+<head>
+    <h1>Details</h1>
+
+</head>
+<body>
+    <h2>{{movie.title}}</h2>
+    <p><b>Release date: </b> {{movie.release_date}}</p>
+    <p><b>Description: </b>{{movie.description}}</p>
+    <p> movie director id = {{movie.director.id}}</p>
+    <p><b>Director: </b> <a href="{% url 'person_detail' movie.director.id%}">{{movie.director}}</a> </p>
+    <p><b>Characters</b></p>
+    {% if characters %}
+    <ul>
+        {% for character in characters %}
+        <li> {{character.nickname}} played by <a href="{% url 'person_detail' character.actor.id%}">{{character.actor}}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No characters are available.</p>
+    {% endif %}
+    <a href="/movies">Back to movies</a>
+</body>
+</html>
