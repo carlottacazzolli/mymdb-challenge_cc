@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cast.apps.CastConfig',
     'movies.apps.MoviesConfig',
     'reviews.apps.ReviewsConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
