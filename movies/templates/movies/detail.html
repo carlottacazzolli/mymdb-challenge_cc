@@ -9,18 +9,21 @@
     <h2>{{movie.title}}</h2>
     <p><b>Release date: </b> {{movie.release_date}}</p>
     <p><b>Description: </b>{{movie.description}}</p>
-    <p> movie director id = {{movie.director.id}}</p>
     <p><b>Director: </b> <a href="{% url 'person_detail' movie.director.id%}">{{movie.director}}</a> </p>
     <p><b>Characters</b></p>
     {% if characters %}
     <ul>
         {% for character in characters %}
+        <p>
+
+        </p>
         <li> {{character.nickname}} played by <a
                 href="{% url 'person_detail' character.actor.id%}">{{character.actor}}</a></li>
+        <p><b>Character reviews</b></p>
         {% for key, values in character_reviews.items%}
             {% if key == character.nickname %}
             {% for value in values%}
-            <p>Comment: {{value.review_text}} - Rating: {{value.rating}}</p>
+            <ul>Comment: {{value.review_text}} - Rating: {{value.rating}}</ul>
             {% endfor %}
             {% endif %}
             {% endfor %}
@@ -30,7 +33,7 @@
     <p>No characters are available.</p>
     {% endif %}
 
-    <p><b>Reviwes</b></p>
+    <p><b>Movie reviwes</b></p>
     {% if movie_reviews %}
     {% for review in movie_reviews %}
     <ul>
