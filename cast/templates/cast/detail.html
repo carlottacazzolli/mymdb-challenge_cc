@@ -1,12 +1,25 @@
 <html>
+
 <head>
     <h1>Details</h1>
 
 </head>
+
 <body>
     <h2>{{person.first_name}}, {{person.last_name}}</h2>
     <p><b>Birthday: </b> {{person.birthday}}</p>
     <p><b>Role: </b>{{person.role}}</p>
+    {% if reviews %}
+    {% for review in reviews %}
+    <p><b>Reviews: </b></p>
+    <ul>
+        <p>Comment: {{review.review_text}} - Rating:{{review.rating}}</p>
+    </ul>
+    {% endfor %}
+    {% else %}
+    <p>No reviews are available.</p>
+    {% endif %}
     <a href="/cast">Back to list</a>
 </body>
+
 </html>

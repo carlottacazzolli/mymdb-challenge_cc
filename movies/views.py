@@ -12,4 +12,9 @@ def index(request):
 def detail(request, movie_id):
     movie = Movie.objects.get(pk=movie_id)
     characters = Character.objects.filter(movie=movie)
-    return render(request, "movies/detail.html", {"movie": movie, 'characters':characters})
+    movie_reviews = movie.review.all() 
+    character_reviews = {}
+    for character in characters:
+        character_reviews[character.nickname] = character.review.all()
+    
+    return render(request, "movies/detail.html", {"movie": movie, 'characters':characters, "movie_reviews": movie_reviews, "character_reviews":character_reviews})

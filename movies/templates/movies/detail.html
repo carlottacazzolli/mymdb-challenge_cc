@@ -1,8 +1,10 @@
 <html>
+
 <head>
     <h1>Details</h1>
 
 </head>
+
 <body>
     <h2>{{movie.title}}</h2>
     <p><b>Release date: </b> {{movie.release_date}}</p>
@@ -13,12 +15,33 @@
     {% if characters %}
     <ul>
         {% for character in characters %}
-        <li> {{character.nickname}} played by <a href="{% url 'person_detail' character.actor.id%}">{{character.actor}}</a></li>
-        {% endfor %}
+        <li> {{character.nickname}} played by <a
+                href="{% url 'person_detail' character.actor.id%}">{{character.actor}}</a></li>
+        {% for key, values in character_reviews.items%}
+            {% if key == character.nickname %}
+            {% for value in values%}
+            <p>Comment: {{value.review_text}} - Rating: {{value.rating}}</p>
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
     </ul>
     {% else %}
     <p>No characters are available.</p>
     {% endif %}
+
+    <p><b>Reviwes</b></p>
+    {% if movie_reviews %}
+    {% for review in movie_reviews %}
+    <ul>
+        <p>Comment: {{review.review_text}} - Rating:{{review.rating}}</p>
+    </ul>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No reviews are available.</p>
+    {% endif %}
     <a href="/movies">Back to movies</a>
-</body>
+
+
 </html>

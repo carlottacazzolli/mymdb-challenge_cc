@@ -16,4 +16,5 @@ def index(request):
 
 def detail(request, person_id):
     person = Person.objects.get(pk=person_id)
-    return render(request, "cast/detail.html", {"person": person})
+    reviews = person.review.all()  # Access reviews via GenericRelation
+    return render(request, "cast/detail.html", {"person": person, "reviews":reviews})
