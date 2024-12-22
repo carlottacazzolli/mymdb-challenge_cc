@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'reviews.apps.ReviewsConfig',
     'home.apps.HomeConfig',
     'rest_framework',
+    'django_webix',
 ]
 
 MIDDLEWARE = [
@@ -67,9 +68,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
+
             ],
         },
     },
+    
 ]
 
 WSGI_APPLICATION = 'mymdb.wsgi.application'
@@ -138,3 +142,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ]
 }
+
+WEBIX_LICENSE = 'FREE'  
+WEBIX_VERSION = '7.0.3'
+WEBIX_CONTAINER_ID = 'content_right'
+WEBIX_FONTAWESOME_CSS_URL = 'fontawesome/css/all.min.css'
+WEBIX_FONTAWESOME_VERSION = '5.12.0'
+WEBIX_HISTORY_ENABLE = True # optional
