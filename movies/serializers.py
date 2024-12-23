@@ -15,7 +15,7 @@ class MovieSerializer(serializers.ModelSerializer):
 class CharacterSerializer(serializers.ModelSerializer):
     actor = serializers.PrimaryKeyRelatedField(queryset=Person.objects.all())
     movie = serializers.PrimaryKeyRelatedField(queryset=Movie.objects.all())
-    review = ReviewSerializer(many=True)
+    review = ReviewSerializer(many=True, read_only=True)
     class Meta():
         model= Character
         fields = ('id', 'nickname', 'movie', 'actor', 'review')

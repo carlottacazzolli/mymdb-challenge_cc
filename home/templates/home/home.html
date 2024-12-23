@@ -1,25 +1,196 @@
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Webix and DRF</title>
-        <link rel="stylesheet" href="https://cdn.webix.com/edge/webix.css" type="text/css">
-        <script src="https://cdn.webix.com/edge/webix.js" type="text/javascript"></script>
-        <h1> Welcome!</h1>
-        <p>This is my movie database website</p>
-    </head>
 
-    <body>
-        <h2>People</h2>
-        <p> Discover our people<a href="/cast"> here</a>
-        </p>
-        <h2>Movies</h2>
-        <p> Discover our movies<a href="/movies"> here</a>
-        </p>
-        <h2>Characters</h2>
-        <p> Discover our characters<a href="/movies/characters"> here</a>
-        </p> 
+<head>
+    <link rel="stylesheet" href="//cdn.webix.com/edge/webix.css" type="text/css">
+    <script src="//cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+</head>
 
+<body>
 
-    </body>
+    <script type="text/javascript" charset="utf-8">
+
+        webix.ui({
+            cols: [
+                {
+                    width: 600,
+                    rows: [
+                        {
+                            view: "label",
+                            label: "Manage Cast",
+                            align: "center",
+                            css: "title-label",
+                            height: 40
+                        },
+                        {
+                            view: "label",
+                            label: "People"
+                        },
+                        {
+                            view: "list",
+                            value: "people",
+                            url: "http://localhost:8000/cast/?format=json",
+                            template: "Name: #first_name#, Last name: #last_name#, Birthday: #birthday#, Role: #role#, ID: #id#"
+                        },
+                        {
+                            view: "form",
+                            id: "form_tipos",
+                            url: "http://localhost:8000/cast/add/",
+                            elements: [
+                                
+                                { view: "text", id: "first_name", name: "first_name", label: "first_name:", required: true },
+                                { view: "text", id: "last_name", name: "last_name", label: "last_name:", placeholder: "last_name", required: true },
+                                { view: "text", id: "birthday", name: "birthday", label: "birthday:", placeholder: "birthday", required: true },
+                                { view: "text", id: "role", name: "role", label: "role:", placeholder: "role", required: true },
+                                {
+                                    margin: 5,
+                                    cols: [
+                                        {
+                                            view: "button", name: "add", id: "add", value: "Add", type: "form",
+                                            click: function () {
+                                                var form = $$("form_tipos");
+                                                if (form.validate()) {
+                                                    webix.ajax().post("http://localhost:8000/cast/add/", form.getValues(), function (res) {
+                                                        /*callback*/
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    ]
+
+                                }
+                            ],
+                            elementsConfig: {
+                                labelWidth: 120,
+                                inputWidth: 300
+                            },
+                            css: "form-container",
+                            autoheight: true
+                        }
+
+                    ]
+                },
+                {
+                    width: 600,
+                    rows: [
+                        {
+                            view: "label",
+                            label: "Manage Movies",
+                            align: "center",
+                            css: "title-label",
+                            height: 40
+                        },
+                        {
+                            view: "label",
+                            label: "Movies"
+                        },
+                        {
+                            view: "list",
+                            value: "people",
+                            url: "http://localhost:8000/movies/?format=json",
+                            template: "Title: #title#, Year: #release_date#, Description: #description#, Director:#director#, ID: #id#"
+                        },
+                        {
+                            view: "form",
+                            id: "form_movies",
+                            url: "http://localhost:8000/movies/add/",
+                            elements: [
+                                { view: "text", id: "title", name: "title", label: "title:", required: true },
+                                { view: "text", id: "release_date", name: "release_date", label: "release_date:", placeholder: "release_date", required: true },
+                                { view: "text", id: "description", name: "description", label: "description:", placeholder: "description", required: true },
+                                { view: "text", id: "director", name: "director", label: "director:", placeholder: "director", required: true },
+                                {
+                                    margin: 5,
+                                    cols: [
+                                        {
+                                            view: "button", name: "add_movie", id: "add_movie", value: "Add", type: "form",
+                                            click: function () {
+                                                var form = $$("form_movies");
+                                                if (form.validate()) {
+                                                    webix.ajax().post("http://localhost:8000/movies/add/", form.getValues(), function (res) {
+                                                        /*callback*/
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    ]
+
+                                }
+                            ],
+                            elementsConfig: {
+                                labelWidth: 120,
+                                inputWidth: 300
+                            },
+                            css: "form-container",
+                            autoheight: true
+                        }
+
+                    ]
+
+                }, 
+                {
+                    width: 600,
+                    rows: [
+                        {
+                            view: "label",
+                            label: "Manage Characters",
+                            align: "center",
+                            css: "title-label",
+                            height: 40
+                        },
+                        {
+                            view: "label",
+                            label: "Character"
+                        },
+                        {
+                            view: "list",
+                            value: "people",
+                            url: "http://localhost:8000/movies/characters/?format=json",
+                            template: "Nickname: #nickname#, Actor: #actor#, Movie: #movie#"
+                        },
+                        {
+                            view: "form",
+                            id: "form_character",
+                            url: "http://localhost:8000/movies/characters/add/",
+                            elements: [
+                                { view: "text", id: "nickname", name: "nickname", label: "nickname:", required: true },
+                                { view: "text", id: "actor", name: "actor", label: "actor:", placeholder: "actor", required: true },
+                                { view: "text", id: "movie", name: "movie", label: "movie:", placeholder: "movie", required: true },
+                                {
+                                    margin: 5,
+                                    cols: [
+                                        {
+                                            view: "button", name: "add_character", id: "add_character", value: "Add", type: "form",
+                                            click: function () {
+                                                var form = $$("form_character");
+                                                if (form.validate()) {
+                                                    webix.ajax().post("http://localhost:8000/movies/characters/add/", form.getValues(), function (res) {
+                                                        /*callback*/
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    ]
+
+                                }
+                            ],
+                            elementsConfig: {
+                                labelWidth: 120,
+                                inputWidth: 300
+                            },
+                            css: "form-container",
+                            autoheight: true
+                        }
+
+                    ]
+
+                }
+
+            ]
+
+        });
+
+    </script>
+</body>
 
 </html>
