@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'rest_framework',
     'django_webix',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -140,8 +141,17 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ], 
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
 }
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'My movie DB',
+    'DESCRIPTION': 'Movies database management',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
 
 WEBIX_LICENSE = 'FREE'  
 WEBIX_VERSION = '7.0.3'

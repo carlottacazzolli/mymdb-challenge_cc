@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.models import User
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+
 
 
 urlpatterns = [
@@ -26,6 +28,8 @@ urlpatterns = [
     path("movies/", include("movies.urls")),
     path('reviews/', include('reviews.urls')), 
     path('django-webix/', include('django_webix.urls')),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 
 ]
 
