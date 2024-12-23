@@ -25,7 +25,7 @@ urlpatterns = [
     path("cast/", include("cast.urls")),
     path("movies/", include("movies.urls")),
     path('reviews/', include('reviews.urls')), 
-    path(r'^django-webix/', include('django_webix.urls')),
+    path('django-webix/', include('django_webix.urls')),
 
 ]
 
